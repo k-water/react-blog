@@ -1,0 +1,5 @@
+.sider-container {
+  height: 100%;
+  background: #fcc;
+  overflow-y: auto;
+}

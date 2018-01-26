@@ -1,0 +1,16 @@
+.wrapper {
+  height: 100%;
+}
+.wrapper-container {
+  padding: 20px;
+  height: 100%;
+}
+.wrapper-content {
+  padding: 0 24px 24px;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+.wrapper-content::-webkit-scrollbar {
+  display: none;
+}
