@@ -8,7 +8,7 @@ import {
 import Index from '../containers/layout/layout'
 export default () => (
   <Router>
-    <div style={{height: '100%'}}>
+    <div>
       <Switch>
         <Route exact path="/" render={() => <Redirect to="/app/index" push />} />
         <Route path="/app" component={Index} />

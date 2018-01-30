@@ -6,9 +6,9 @@ class SiderCustom extends Component {
   render() {
     return (
       <Sider
-        width={280}
         className="sider-container"
       >
+        sdsadsa
       </Sider>
     )
   }
