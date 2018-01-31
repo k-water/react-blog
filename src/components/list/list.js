@@ -74,7 +74,7 @@ class BlogList extends Component {
               className="list-item"
               title={item.title}
               description={item.summary}
-              onClick={()=>console.log(item.id)}
+              onClick={()=>this.props.history.push(`/app/blog/desc/${item.id}`)}
             />
           </List.Item>
         )}

@@ -4,6 +4,7 @@ import axios from 'axios'
  * action type
  */
 const LIST = 'LIST'
+const DESC = 'DESC'
 const ERROR = 'ERROR'
 /**
  * state
@@ -27,6 +28,12 @@ export function blog(state=initState, action) {
         msg: action.payload.message,
         ...action.payload.body.data
       }
+    case DESC:
+      return {
+        ...state,
+        content: action.payload.body.data,
+        msg: action.payload.message
+      }
     case ERROR:
       return {
         ...state,
@@ -49,6 +56,13 @@ function getList(data) {
   }
 }
 
+function getDesc(data) {
+  return {
+    type: DESC,
+    payload: data
+  }
+}
+
 function errorMsg(data) {
   return {
     type: ERROR,
@@ -62,7 +76,7 @@ function errorMsg(data) {
 
 export function getBlogList(pageIndex = 0) {
   return dispatch => {
-    axios.get('/u/admin/blogs',{
+    axios.get('/u/admin/blogs', {
       params: {
         pageIndex: pageIndex
       }
@@ -70,6 +84,22 @@ export function getBlogList(pageIndex = 0) {
       .then(res => {
         if (res.status === 200 && res.data.code === 0) {
           dispatch(getList(res.data))
+        } else {
+          dispatch(errorMsg(res.data.message))
+        }
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+}
+
+export function getBlogDesc(id) {
+  return dispatch => {
+    axios.get(`/u/admin/blogs/edit/${id}`)
+      .then(res => {
+        if (res.status === 200 && res.data.code === 0) {
+          dispatch(getDesc(res.data))
         } else {
           dispatch(errorMsg(res.data.message))
         }

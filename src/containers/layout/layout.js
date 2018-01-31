@@ -14,7 +14,7 @@ import './layout.css'
 const { Content, Footer } = Layout
 class Index extends Component {
   render() {
-    const contentHeight = document.body.clientHeight - 64 -62 -20
+    const contentHeight = document.body.clientHeight - 64 -62
     return (
       <Layout className="wrapper">
         <HeaderCustom></HeaderCustom>
