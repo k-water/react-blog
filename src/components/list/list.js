@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { timetrans, color } from '../../utils/utils'
 import { 
   List,
-  Icon
+  Icon,
+  Tag
 } from 'antd'
 import {
   getBlogList
@@ -32,7 +34,7 @@ class BlogList extends Component {
           current: page
         })
         this.props.getBlogList(page - 1)
-      }),
+      })
     }
     const IconText = ({ type, text }) => (
       <span>
@@ -51,12 +53,28 @@ class BlogList extends Component {
             key={item.title}
             actions={
               [<IconText type="like-o" text={item.voteSize} />, 
-              <IconText type="message" text={item.commentSize} />
+              <IconText type="message" text={item.commentSize} />,
+              <IconText type="tags-o" text={
+                item.tags.split(',').map(v => (
+                  <Tag
+                    key={item.id + Math.random()}
+                    color={color[Math.floor(Math.random()*color.length)]}
+                    onClick={()=>{}}
+                  >
+                    {v}
+                  </Tag>
+               ))
+              } />
+            ]}
+            extra={[
+              timetrans(item.createTime)
             ]}
           >
             <List.Item.Meta
+              className="list-item"
               title={item.title}
               description={item.summary}
+              onClick={()=>console.log(item.id)}
             />
           </List.Item>
         )}

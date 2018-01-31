@@ -9,3 +9,14 @@
   line-height: 1.2;
   color: #2e3135;
 }
+.read-all {
+  display: flex;
+  flex-direction: row-reverse;
+}
+.list-item {
+  cursor: pointer;
+}
+/* .ant-list-item-extra {
+  display: flex;
+  flex-direction: column;
+} */
