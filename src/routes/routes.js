@@ -8,11 +8,9 @@ import {
 import Index from '../containers/layout/layout'
 export default () => (
   <Router>
-    <div>
-      <Switch>
-        <Route exact path="/" render={() => <Redirect to="/app/index" push />} />
-        <Route path="/app" component={Index} />
-      </Switch>
-    </div>
+    <Switch>
+      <Route exact path="/" render={() => <Redirect to="/app/index" push />} />
+      <Route path="/app" component={Index} />
+    </Switch>
   </Router>
 )

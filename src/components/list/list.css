@@ -1,0 +1,11 @@
+.ant-list-item {
+  background: #fff;
+  padding: 20px;
+  margin-bottom: 10px;
+}
+.ant-list-item .ant-list-item-meta-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: #2e3135;
+}
