@@ -3,10 +3,15 @@ import { connect } from 'react-redux'
 import { getBlogDesc } from '../../redux/blog.redux'
 import marked from 'marked'
 import hljs from 'highlight.js'
-
+import {
+  timetrans,
+  color
+} from '../../utils/utils'
 import {
   Card,
-  Icon
+  Icon,
+  Tag,
+  Button
 } from 'antd'
 import './desc.css'
 @connect(
@@ -33,13 +38,38 @@ class Desc extends Component {
     })
   }
   render() {
+    const IconText = ({ type, text }) => (
+      <span>
+        <Icon type={type} style={{ marginRight: 8 }} />
+        {text}
+      </span>
+    )
     return (
       <Card
         className="article-wrapper"
         loading={this.state.loading}
         title={this.props.content.title}
+        extra={[
+          <Tag color="red">
+            作者：admin
+          </Tag>,
+          <span style={{marginTop: 10}}>{timetrans(this.props.content.createTime)}</span>
+        ]}
         actions={[<Icon type="like-o" />]}
       >
+        <div className="article-tags">
+          <IconText type="tags-o" text={
+            this.props.tags.split(',').map(v => (
+              <Tag
+                key={this.props.id + Math.random()}
+                color={color[Math.floor(Math.random()*color.length)]}
+                onClick={()=>{}}
+              >
+                {v}
+              </Tag>
+            ))}
+          />
+        </div>
         <div 
           className="article-detail" 
           dangerouslySetInnerHTML={{ __html: marked(this.props.content.content) }} 

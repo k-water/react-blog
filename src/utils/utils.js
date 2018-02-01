@@ -6,7 +6,7 @@ export function timetrans(time){
   var h = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ':'
   var m = (date.getMinutes() <10 ? '0' + date.getMinutes() : date.getMinutes()) + ':'
   var s = (date.getSeconds() <10 ? '0' + date.getSeconds() : date.getSeconds())
-  return Y+M+D+h+m+s
+  return Y+M+D
 }
 
 export const color = [

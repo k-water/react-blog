@@ -113,7 +113,7 @@
 @media only screen 
   and (min-device-width: 414px) 
   and (max-device-width: 736px) 
-  and (-webkit-min-device-pixel-ratio: 3) {
+  and (-webkit-min-device-pixel-ratio: 2) {
     .article-wrapper {
       width: 334px;
     }
@@ -351,4 +351,25 @@
 .article-detail table td:first-child,
 .article-detail table th:first-child {
   border-left: none;
+}
+.article-wrapper .article-tags {
+  display: flex;
+  flex-direction: row-reverse;
+}
+.article-wrapper .ant-card-body {
+  padding-top: 12px;
+}
+.article-wrapper .ant-card-head-title {
+  font-size: 1.5em;
+}
+.article-wrapper .ant-card-extra {
+  display: flex;
+  flex-direction: column;
+}
+.article-wrapper .ant-card-extra .ant-tag {
+  margin: 0;
+}
+.article-wrapper .ant-card-head-title {
+  display: flex;
+  align-items: center;
 }
