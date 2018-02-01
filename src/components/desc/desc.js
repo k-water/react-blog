@@ -34,18 +34,17 @@ class Desc extends Component {
   }
   render() {
     return (
-      <div>
-        <Card
-          loading={this.state.loading}
-          title={this.props.content.title}
-          actions={[<Icon type="like-o" />]}
-        >
-          <div 
-            className="article-detail" 
-            dangerouslySetInnerHTML={{ __html: marked(this.props.content.content) }} 
-          />
-        </Card>
-      </div>
+      <Card
+        className="article-wrapper"
+        loading={this.state.loading}
+        title={this.props.content.title}
+        actions={[<Icon type="like-o" />]}
+      >
+        <div 
+          className="article-detail" 
+          dangerouslySetInnerHTML={{ __html: marked(this.props.content.content) }} 
+        />
+      </Card>
     )
   }
 }
