@@ -80,7 +80,7 @@
   and (max-device-width: 480px)
   and (-webkit-min-device-pixel-ratio: 2) {
     .article-wrapper {
-      width: 248px;
+      width: 272px;
     }
 }
 /* ----------- iPhone 5 and 5S ----------- */
@@ -89,14 +89,14 @@
   and (max-device-width: 568px)
   and (-webkit-min-device-pixel-ratio: 2) {
     .article-wrapper {
-      width: 248px;
+      width: 272px;
     }
 }
 /* ----------- android ----------- */
 @media only screen
  and (max-device-width: 640px) {
   .article-wrapper {
-    width: 284px;
+    width: 312px;
   }
 }
 /* ----------- iPhone 6 ----------- */
@@ -105,7 +105,7 @@
   and (max-device-width: 667px)
   and (-webkit-min-device-pixel-ratio: 2) {
     .article-wrapper {
-      width: 298px;
+      width: 328px;
     }
 }
 /* ----------- iPhone 6+ ----------- */
@@ -115,7 +115,7 @@
   and (max-device-width: 736px) 
   and (-webkit-min-device-pixel-ratio: 2) {
     .article-wrapper {
-      width: 334px;
+      width: 366px;
     }
 }
 /* ----------- iPad ----------- */
@@ -125,7 +125,7 @@
   and (max-device-width: 1024px) 
   and (-webkit-min-device-pixel-ratio: 1) {
     .article-wrapper {
-      width: 412px;
+      width: 450px;
     }
 }
 /* Landscape */
@@ -135,7 +135,7 @@
   and (orientation: landscape) 
   and (-webkit-min-device-pixel-ratio: 1) {
     .article-wrapper {
-      width: 561px;
+      width: 610px;
     }
 }
 .article-detail {

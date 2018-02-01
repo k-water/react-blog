@@ -23,11 +23,11 @@ class Index extends Component {
             <Content
               style={{ padding: 24, margin: 0, minHeight: contentHeight, height: '100%', overflow: 'initial'}}
             >
-              <Row gutter={20}>
+              <Row type="flex">
                 <Col
-                  lg={{ span: 14, offset: 3 }}
-                  md={{ span: 14, offset: 1 }}
-                  xs={{ span: 22, offset: 1 }}
+                  lg={{ span: 15, offset: 1 }}
+                  md={{ span: 15, offset: 1 }}
+                  xs={{ span: 24 }}
                 >
                   {
                     routes.map(({ path, key, component, ...props }) => (
@@ -41,8 +41,8 @@ class Index extends Component {
                   }
                 </Col>
                 <Col
-                  lg={{ span: 6 }}
-                  md={{ span: 6 }}
+                  lg={{ span: 6, offset: 1 }}
+                  md={{ span: 6, offset: 1 }}
                   xs={{ span: 0 }}
                 >
                   <SiderCustom />
