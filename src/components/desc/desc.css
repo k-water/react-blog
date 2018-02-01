@@ -373,3 +373,26 @@
   display: flex;
   align-items: center;
 }
+
+.article-navigation-content {
+  padding-left: 20px;
+}
+
+.article-navigation-content ul {
+  padding: 5px;
+}
+
+.article-navigation-content li {
+  margin-left: 10px;
+  list-style-type: disc;
+  /* display: block; */
+  /* padding: 5px 24px; */
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 32px;
+  color: #8590a6;
+  text-align: left;
+}
+.catalog .ant-card-body {
+  padding: 5px 10px;
+}

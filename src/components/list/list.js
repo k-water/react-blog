@@ -4,8 +4,11 @@ import { timetrans, color } from '../../utils/utils'
 import { 
   List,
   Icon,
-  Tag
+  Tag,
+  Row,
+  Col
 } from 'antd'
+import SiderCustom from '../sider/siderCustom'
 import {
   getBlogList
 } from '../../redux/blog.redux'
@@ -43,42 +46,58 @@ class BlogList extends Component {
       </span>
     )
     return (
-      <List
-        itemLayout="vertical"
-        size="large"
-        pagination={pagination}
-        dataSource={this.props.content}
-        renderItem={item => (
-          <List.Item
-            key={item.title}
-            actions={
-              [<IconText type="like-o" text={item.voteSize} />, 
-              <IconText type="message" text={item.commentSize} />,
-              <IconText type="tags-o" text={
-                item.tags.split(',').map(v => (
-                  <Tag
-                    key={item.id + Math.random()}
-                    color={color[Math.floor(Math.random()*color.length)]}
-                    onClick={()=>{}}
-                  >
-                    {v}
-                  </Tag>
-               ))
-              } />
-            ]}
-            extra={[
-              timetrans(item.createTime)
-            ]}
-          >
-            <List.Item.Meta
-              className="list-item"
-              title={item.title}
-              description={item.summary}
-              onClick={()=>this.props.history.push(`/app/blog/desc/${item.id}`)}
-            />
-          </List.Item>
-        )}
-      />
+      <Row>
+        <Col
+          lg={{ span: 15, offset: 1 }}
+          md={{ span: 15, offset: 1 }}
+          xs={{ span: 24 }}
+        >
+          <List
+            itemLayout="vertical"
+            size="large"
+            pagination={pagination}
+            dataSource={this.props.content}
+            renderItem={item => (
+              <List.Item
+                key={item.title}
+                actions={
+                  [<IconText type="like-o" text={item.voteSize} />, 
+                  <IconText type="message" text={item.commentSize} />,
+                  <IconText type="tags-o" text={
+                    item.tags.split(',').map(v => (
+                      <Tag
+                        key={item.id + Math.random()}
+                        color={color[Math.floor(Math.random()*color.length)]}
+                        onClick={()=>{}}
+                      >
+                        {v}
+                      </Tag>
+                  ))
+                  } />
+                ]}
+                extra={[
+                  timetrans(item.createTime)
+                ]}
+              >
+                <List.Item.Meta
+                  className="list-item"
+                  title={item.title}
+                  description={item.summary}
+                  onClick={()=>this.props.history.push(`/app/blog/desc/${item.id}`)}
+                />
+              </List.Item>
+            )}
+          />
+        </Col>
+        <Col
+          lg={{ span: 6, offset: 1 }}
+          md={{ span: 6, offset: 1 }}
+          xs={{ span: 0 }}
+        >
+          <SiderCustom />
+        </Col>
+
+      </Row>
     )
   }
 }

@@ -1,3 +1,25 @@
 .sider-container {
-  background: #fcc;
+}
+.sider-container
+.ant-card-body {
+  padding: 0;
+}
+.sider-container 
+.recent-list {
+  width: 100%;
+}
+.sider-container 
+.recent-list li {
+  display: block;
+  padding: 5px 24px;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 32px;
+  color: #8590a6;
+  text-align: left;
+}
+.sider-container 
+.recent-list li:hover {
+  color: rgb(0, 132, 255);
+  background: rgb(246, 246, 246);
 }

@@ -76,7 +76,13 @@ function errorMsg(data) {
  * aysnc function
  */
 
-export function getBlogList(pageIndex = 0) {
+export function getBlogList(
+  order = '',
+  catalogId = '',
+  keyword = '',
+  pageIndex = 0,
+  pageSize = 10
+) {
   return dispatch => {
     axios.get('/u/admin/blogs', {
       params: {
