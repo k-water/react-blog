@@ -10,8 +10,7 @@ import {
 import {
   Card,
   Icon,
-  Tag,
-  Button
+  Tag
 } from 'antd'
 import './desc.css'
 @connect(
@@ -39,7 +38,7 @@ class Desc extends Component {
   }
   render() {
     const IconText = ({ type, text }) => (
-      <span>
+      <span key={text}>
         <Icon type={type} style={{ marginRight: 8 }} />
         {text}
       </span>
@@ -50,10 +49,10 @@ class Desc extends Component {
         loading={this.state.loading}
         title={this.props.content.title}
         extra={[
-          <Tag color="red">
+          <Tag color="red" key="author">
             作者：admin
           </Tag>,
-          <span style={{marginTop: 10}}>{timetrans(this.props.content.createTime)}</span>
+          <span style={{marginTop: 10}} key="time">{timetrans(this.props.content.createTime)}</span>
         ]}
         actions={[<Icon type="like-o" />]}
       >
@@ -61,7 +60,7 @@ class Desc extends Component {
           <IconText type="tags-o" text={
             this.props.tags.split(',').map(v => (
               <Tag
-                key={this.props.id + Math.random()}
+                key={v}
                 color={color[Math.floor(Math.random()*color.length)]}
                 onClick={()=>{}}
               >
