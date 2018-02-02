@@ -4,7 +4,7 @@ class Navigation extends Component {
   constructor() {
     super()
     this.state = {
-      menuList: [],
+      menuList: []
     }
     this.getMenuList = this.getMenuList.bind(this)
   }
@@ -36,7 +36,6 @@ class Navigation extends Component {
           title: menu[i].title,
           children: [],
         }
-        // menuObj.push(level2Temp)
       } else if (menu[i].level === 3) {
         level3Temp = {
           id: i,

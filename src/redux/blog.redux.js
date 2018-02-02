@@ -12,7 +12,8 @@ const ERROR = 'ERROR'
 const initState = {
   content: '',
   msg: '',
-  tags: ''
+  tags: '',
+  desc: ''
 }
 
 /**
@@ -27,13 +28,14 @@ export function blog(state=initState, action) {
         ...state,
         content: action.payload.body.data.content,
         msg: action.payload.message,
+        desc: '',
         ...action.payload.body.data
       }
     case DESC:
       return {
         ...state,
         tags: action.payload.body.data.tags,
-        content: action.payload.body.data,
+        desc: action.payload.body.data,
         msg: action.payload.message
       }
     case ERROR:

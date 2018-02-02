@@ -56,12 +56,12 @@ class Desc extends Component {
           <Card
             className="article-wrapper"
             loading={this.state.loading}
-            title={this.props.content.title}
+            title={this.props.desc.title}
             extra={[
               <Tag color="red" key="author">
                 作者：admin
               </Tag>,
-              <span style={{marginTop: 10}} key="time">{timetrans(this.props.content.createTime)}</span>
+              <span style={{marginTop: 10}} key="time">{timetrans(this.props.desc.createTime)}</span>
             ]}
             actions={[<Icon type="like-o" />]}
           >
@@ -80,7 +80,7 @@ class Desc extends Component {
             </div>
             <div 
               className="article-detail" 
-              dangerouslySetInnerHTML={{ __html: marked(this.props.content.content) }} 
+              dangerouslySetInnerHTML={{ __html: marked(this.props.desc.content) }} 
             />
           </Card>
         </Col>
@@ -90,10 +90,10 @@ class Desc extends Component {
           xs={{ span: 0 }}
         >
           {
-            this.props.content.content ?
+            this.props.desc.content ?
             <Card title="目录" className="catalog">
               <Navigation 
-                content={this.props.content.content}
+                content={this.props.desc.content}
               />
             </Card>
             : null
