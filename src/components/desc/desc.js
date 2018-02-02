@@ -14,6 +14,7 @@ import {
   Row,
   Col
 } from 'antd'
+import Comment from '../comment/comment'
 import Navigation from './navigation'
 import './desc.css'
 @connect(
@@ -83,6 +84,7 @@ class Desc extends Component {
               dangerouslySetInnerHTML={{ __html: marked(this.props.desc.content) }} 
             />
           </Card>
+          <Comment />
         </Col>
         <Col
           lg={{ span: 6, offset: 1 }}
