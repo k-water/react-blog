@@ -6,14 +6,18 @@ import axios from 'axios'
 const LIST = 'LIST'
 const DESC = 'DESC'
 const ERROR = 'ERROR'
+const CREATE = 'CREATE'
 /**
  * state
  */
 const initState = {
+  user: '',
   content: '',
   msg: '',
   tags: '',
-  desc: ''
+  desc: '',
+  comment: '',
+  commentSize: ''
 }
 
 /**
@@ -26,9 +30,11 @@ export function blog(state=initState, action) {
     case LIST:
       return {
         ...state,
+        desc: '',
+        comment: '',
+        commentSize: '',
         content: action.payload.body.data.content,
         msg: action.payload.message,
-        desc: '',
         ...action.payload.body.data
       }
     case DESC:
@@ -36,12 +42,28 @@ export function blog(state=initState, action) {
         ...state,
         tags: action.payload.body.data.tags,
         desc: action.payload.body.data,
-        msg: action.payload.message
+        msg: action.payload.message,
+        comment: action.payload.body.data.comments
+      }
+    case CREATE:
+      return {
+        ...state,
+        commentSize: state.comment.push({
+          content: action.newComment,
+          user: {
+            username: state.comment[0].user.username
+          }
+        })
       }
     case ERROR:
       return {
         ...state,
+        user: '',
         content: '',
+        tags: '',
+        desc: '',
+        comment: '',
+        commentSize: '',
         msg: action.payload
       }
     default:
@@ -64,6 +86,14 @@ function getDesc(data) {
   return {
     type: DESC,
     payload: data
+  }
+}
+
+function createType(data, comment) {
+  return {
+    type: CREATE,
+    payload: data,
+    newComment: comment
   }
 }
 
@@ -117,5 +147,34 @@ export function getBlogDesc(id) {
       .catch(err => {
         console.log(err)
       })
+  }
+}
+
+export function createComment({
+  blogId,
+  userId,
+  commentContent
+}) {
+  return dispatch => {
+    axios.post('/u/comments', {
+      blogId,
+      userId,
+      commentContent
+    }, {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+      }
+    })
+    .then(res => {
+      if(res.status === 200 && res.data.code === 0) {
+        console.log(commentContent)
+        dispatch(createType(res.data, commentContent))
+      } else {
+        dispatch(errorMsg(res.data.message))
+      }
+    })
+    .catch(err => {
+      console.log(err)
+    })
   }
 }

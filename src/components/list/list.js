@@ -51,6 +51,7 @@ class BlogList extends Component {
           lg={{ span: 15, offset: 1 }}
           md={{ span: 15, offset: 1 }}
           xs={{ span: 24 }}
+          className="list-wrapper"
         >
           <List
             itemLayout="vertical"
