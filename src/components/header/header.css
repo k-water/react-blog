@@ -5,6 +5,11 @@
   margin: 16px 28px 16px 0;
   float: left;
 }
+.header-container .nav-auth {
+  float: right;
+  right: 10px;
+} 
+
 .ant-layout-header {
   background: rgb(255, 255, 255);
 }

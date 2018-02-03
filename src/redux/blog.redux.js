@@ -5,7 +5,7 @@ import axios from 'axios'
  */
 const LIST = 'LIST'
 const DESC = 'DESC'
-const ERROR = 'ERROR'
+const ERROR_BLOG = 'ERROR_BLOG'
 const CREATE = 'CREATE'
 /**
  * state
@@ -55,7 +55,7 @@ export function blog(state=initState, action) {
           }
         })
       }
-    case ERROR:
+    case ERROR_BLOG:
       return {
         ...state,
         user: '',
@@ -99,7 +99,7 @@ function createType(data, comment) {
 
 function errorMsg(data) {
   return {
-    type: ERROR,
+    type: ERROR_BLOG,
     payload: data
   }
 }

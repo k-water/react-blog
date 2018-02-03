@@ -1,11 +1,16 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import {
   Card,
   Input,
-  Button
+  Button,
+  message
 } from 'antd'
 import './comment.css'
 const { TextArea } = Input
+@connect(
+  state => state
+)
 class CommentInput extends Component {
   constructor(props) {
     super(props)
@@ -26,10 +31,16 @@ class CommentInput extends Component {
     })
   }
   handleSubmit() {
-    this.props.createComment(this.state)
-    this.setState({
-      commentContent: ''
-    })
+    if(!this.state.commentContent) {
+      message.error('请先输入内容', 1)
+    } else if(!this.props.user.user) {
+      message.error('请先登录', 1)
+    } else {
+      this.props.createComment(this.state)
+      this.setState({
+        commentContent: ''
+      })
+    }
   }
   render() {
     return (

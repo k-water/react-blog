@@ -3,24 +3,36 @@ import axios from 'axios'
 /**
  * type
  */
-const CREATE = 'CREATE'
-const ERROR = 'ERROR'
 
+const LOGIN = 'LOGIN'
+const ERROR_USER = 'ERROR_USER'
+
+/**
+ * state
+ */
 const initState = {
   user: '',
-  msg: '',
-  content: ''
+  msg: ''
 }
 
 /**
  * reducer
+ * @param {*} state 
+ * @param {*} action 
  */
-export function comment(state=initState, action) {
+export function user(state=initState, action) {
   switch(action.type) {
-    case CREATE:
+    case LOGIN:
       return {
         ...state,
+        user: action.payload.body,
         msg: action.payload.message
+      }
+    case ERROR_USER:
+      return {
+        ...state,
+        user: '',
+        msg: action.payload
       }
     default:
       return state
@@ -31,38 +43,32 @@ export function comment(state=initState, action) {
  * action type
  */
 
-function createType(data) {
+function loginType(data) {
   return {
-    type: CREATE,
+    type: LOGIN,
     payload: data
   }
 }
 
 function errorMsg(data) {
   return {
-    type: ERROR,
+    type: ERROR_USER,
     payload: data
   }
 }
 
-export function createComment({
-  blogId,
-  userId,
-  commentContent
+export function login({
+  username,
+  password
 }) {
   return dispatch => {
-    axios.post('/u/comments', {
-      blogId,
-      userId,
-      commentContent
-    }, {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-      }
+    axios.post('/users/login', {
+      username,
+      password
     })
     .then(res => {
       if(res.status === 200 && res.data.code === 0) {
-        dispatch(createType(res.data))
+        dispatch(loginType(res.data))
       } else {
         dispatch(errorMsg(res.data.message))
       }
