@@ -10,6 +10,7 @@ import {
 } from 'antd'
 import { connect } from 'react-redux'
 import Login from '../../containers/login/login'
+import Register from '../../containers/register/register'
 import { logout } from '../../redux/user.redux'
 import './header.css'
 const { Header } = Layout
@@ -21,19 +22,32 @@ class HeaderCustom extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      visible: false
+      login: false,
+      register: false
     }
-    this.showModal = this.showModal.bind(this)
-    this.handleCancel = this.handleCancel.bind(this)
+    this.showLoginModal = this.showLoginModal.bind(this)
+    this.showRegisterModal = this.showRegisterModal.bind(this)
+    this.handleLoginCancel = this.handleLoginCancel.bind(this)
+    this.handleRegisterCancel = this.handleRegisterCancel.bind(this)
   }
-  showModal() {
+  showLoginModal() {
     this.setState({
-      visible: true
+      login: true
     })
   }
-  handleCancel() {
+  showRegisterModal() {
     this.setState({
-      visible: false
+      register: true
+    })
+  }
+  handleLoginCancel() {
+    this.setState({
+      login: false
+    })
+  }
+  handleRegisterCancel() {
+    this.setState({
+      register: false
     })
   }
   render() {
@@ -68,11 +82,16 @@ class HeaderCustom extends Component {
                 type="primary" 
                 size="small" 
                 style={{marginRight: 20}}
-                onClick={this.showModal}
+                onClick={this.showLoginModal}
               >
                 登录
               </Button>
-              <Button ghost type="danger" size="small">
+              <Button 
+                ghost 
+                type="danger" 
+                size="small"
+                onClick={this.showRegisterModal}
+              >
                 注册
               </Button>
             </div>
@@ -97,8 +116,12 @@ class HeaderCustom extends Component {
           </Col>
         </Row>
         <Login
-          visible={this.state.visible}
-          handleCancel={this.handleCancel}
+          visible={this.state.login}
+          handleCancel={this.handleLoginCancel}
+        />
+        <Register
+          visible={this.state.register}
+          handleCancel={this.handleRegisterCancel}
         />
       </Header>
     )

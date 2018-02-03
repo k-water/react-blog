@@ -6,6 +6,7 @@ import axios from 'axios'
 
 const LOGIN = 'LOGIN'
 const LOGOUT = 'LOGOUT'
+const REGISTER = 'REGISTER'
 const ERROR_USER = 'ERROR_USER'
 
 /**
@@ -27,6 +28,12 @@ export function user(state=initState, action) {
       return {
         ...state,
         user: action.payload.body,
+        msg: action.payload.message
+      }
+    case REGISTER:
+      return {
+        ...state,
+        user: '',
         msg: action.payload.message
       }
     case LOGOUT:
@@ -56,6 +63,13 @@ function loginType(data) {
   }
 }
 
+function registerType(data) {
+  return {
+    type: REGISTER,
+    payload: data
+  }
+}
+
 export function logout() {
   return {
     type: LOGOUT
@@ -81,6 +95,28 @@ export function login({
     .then(res => {
       if(res.status === 200 && res.data.code === 0) {
         dispatch(loginType(res.data))
+      } else {
+        dispatch(errorMsg(res.data.message))
+      }
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
+}
+
+export function register({
+  username,
+  password
+}) {
+  return dispatch => {
+    axios.post('/users', {
+      username,
+      password
+    })
+    .then(res => {
+      if (res.status === 200 && res.data.code === 0) {
+        dispatch(registerType(res.data))
       } else {
         dispatch(errorMsg(res.data.message))
       }
