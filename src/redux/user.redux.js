@@ -5,6 +5,7 @@ import axios from 'axios'
  */
 
 const LOGIN = 'LOGIN'
+const LOGOUT = 'LOGOUT'
 const ERROR_USER = 'ERROR_USER'
 
 /**
@@ -28,6 +29,11 @@ export function user(state=initState, action) {
         user: action.payload.body,
         msg: action.payload.message
       }
+    case LOGOUT:
+      return {
+        user: '',
+        msg: ''
+      }
     case ERROR_USER:
       return {
         ...state,
@@ -47,6 +53,12 @@ function loginType(data) {
   return {
     type: LOGIN,
     payload: data
+  }
+}
+
+export function logout() {
+  return {
+    type: LOGOUT
   }
 }
 

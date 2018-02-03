@@ -33,6 +33,10 @@ class Login extends Component {
           message.error(this.props.msg, 1)
         } else {
           this.props.handleCancel()
+          this.setState({
+            username: '',
+            password: ''
+          })
         }
       }, 500)
     }

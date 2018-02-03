@@ -3,11 +3,20 @@ import {
   Layout,
   Row,
   Col,
-  Button
+  Button,
+  Menu,
+  Dropdown,
+  Avatar
 } from 'antd'
+import { connect } from 'react-redux'
 import Login from '../../containers/login/login'
+import { logout } from '../../redux/user.redux'
 import './header.css'
 const { Header } = Layout
+@connect(
+  state => state.user,
+  { logout }
+)
 class HeaderCustom extends Component {
   constructor(props) {
     super(props)
@@ -28,6 +37,18 @@ class HeaderCustom extends Component {
     })
   }
   render() {
+    const menu = (
+      <Menu>
+        <Menu.Item>
+          <span 
+            className="user-logout"
+            onClick={this.props.logout}
+          >
+            退出登录
+          </span>
+        </Menu.Item>
+      </Menu>
+    )
     return (
       <Header className="header-container">
         <Row>
@@ -38,7 +59,10 @@ class HeaderCustom extends Component {
             {/* <h1>Navigation</h1> */}
           </Col>
           <Col lg={{span: 6}}>
-            <div className="nav-auth">
+            <div 
+              className="nav-auth"
+              style={{display: this.props.user ? 'none' : 'block'}}
+            >
               <Button 
                 ghost 
                 type="primary" 
@@ -51,6 +75,24 @@ class HeaderCustom extends Component {
               <Button ghost type="danger" size="small">
                 注册
               </Button>
+            </div>
+
+            <div 
+              className="user-info"
+              style={{display: this.props.user ? 'block' : 'none'}}
+            >
+              <Dropdown
+                placement="bottomCenter"
+                overlay={menu}
+              >
+                <Avatar
+                  className="user-avatar"
+                  shape="square" 
+                  size="large" 
+                  icon="user"
+                  style={{backgroundColor: '#87d068'}}
+                />
+              </Dropdown>
             </div>
           </Col>
         </Row>
