@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 import {
   Card,
   Input,
@@ -8,6 +9,7 @@ import {
 } from 'antd'
 import './comment.css'
 const { TextArea } = Input
+@withRouter
 @connect(
   state => state
 )
@@ -15,8 +17,6 @@ class CommentInput extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      blogId: 1,
-      userId: 2,
       commentContent: ''
     }
     this.handleChange = this.handleChange.bind(this)
@@ -31,12 +31,21 @@ class CommentInput extends Component {
     })
   }
   handleSubmit() {
+    const blogId = this.props.match.params.id
+    const userId = this.props.user.user.user.id
+    const username = this.props.user.user.user.username
+    const commentContent = this.state.commentContent
     if(!this.state.commentContent) {
       message.error('请先输入内容', 1)
     } else if(!this.props.user.user) {
       message.error('请先登录', 1)
     } else {
-      this.props.createComment(this.state)
+      this.props.createComment({
+        blogId,
+        userId,
+        commentContent,
+        username
+      })
       this.setState({
         commentContent: ''
       })

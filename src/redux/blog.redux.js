@@ -11,7 +11,6 @@ const CREATE = 'CREATE'
  * state
  */
 const initState = {
-  user: '',
   content: '',
   msg: '',
   tags: '',
@@ -51,19 +50,13 @@ export function blog(state=initState, action) {
         commentSize: state.comment.push({
           content: action.newComment,
           user: {
-            username: state.comment[0].user.username
+            username: action.username
           }
         })
       }
     case ERROR_BLOG:
       return {
         ...state,
-        user: '',
-        content: '',
-        tags: '',
-        desc: '',
-        comment: '',
-        commentSize: '',
         msg: action.payload
       }
     default:
@@ -89,11 +82,12 @@ function getDesc(data) {
   }
 }
 
-function createType(data, comment) {
+function createType(data, comment, username) {
   return {
     type: CREATE,
     payload: data,
-    newComment: comment
+    newComment: comment,
+    username: username
   }
 }
 
@@ -153,7 +147,8 @@ export function getBlogDesc(id) {
 export function createComment({
   blogId,
   userId,
-  commentContent
+  commentContent,
+  username
 }) {
   return dispatch => {
     axios.post('/u/comments', {
@@ -168,7 +163,7 @@ export function createComment({
     .then(res => {
       if(res.status === 200 && res.data.code === 0) {
         console.log(commentContent)
-        dispatch(createType(res.data, commentContent))
+        dispatch(createType(res.data, commentContent, username))
       } else {
         dispatch(errorMsg(res.data.message))
       }
