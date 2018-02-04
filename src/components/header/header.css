@@ -21,6 +21,22 @@
   padding: 20px;
 }
 
+.header-container .ant-menu-horizontal {
+  height: 64px;
+  line-height: 64px;
+  display: flex;
+  justify-content: space-around;
+  border-bottom: none;
+}
+
+.ant-dropdown-menu-item {
+  padding: 12px;
+}
+
+.ant-dropdown-menu-item a i {
+  padding-right: 5px;
+}
+
 .ant-layout-header {
   background: rgb(255, 255, 255);
 }

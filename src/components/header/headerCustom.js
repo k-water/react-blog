@@ -6,12 +6,15 @@ import {
   Button,
   Menu,
   Dropdown,
-  Avatar
+  Avatar,
+  Icon
 } from 'antd'
 import { connect } from 'react-redux'
 import Login from '../../containers/login/login'
 import Register from '../../containers/register/register'
+import Navigate from '../menu/menu'
 import { logout } from '../../redux/user.redux'
+import { menus } from '../../constants/menus'
 import './header.css'
 const { Header } = Layout
 @connect(
@@ -23,12 +26,14 @@ class HeaderCustom extends Component {
     super(props)
     this.state = {
       login: false,
-      register: false
+      register: false,
+      nav: '首页'
     }
     this.showLoginModal = this.showLoginModal.bind(this)
     this.showRegisterModal = this.showRegisterModal.bind(this)
     this.handleLoginCancel = this.handleLoginCancel.bind(this)
     this.handleRegisterCancel = this.handleRegisterCancel.bind(this)
+    this.menuClick = this.menuClick.bind(this)
   }
   showLoginModal() {
     this.setState({
@@ -50,6 +55,11 @@ class HeaderCustom extends Component {
       register: false
     })
   }
+  menuClick({key}) {
+    this.setState({
+      nav: key
+    })
+  }
   render() {
     const menu = (
       <Menu>
@@ -63,22 +73,46 @@ class HeaderCustom extends Component {
         </Menu.Item>
       </Menu>
     )
+    const navigator = (
+      <Navigate
+        menus={menus}
+        onClick={this.menuClick}
+        style={{width: 90, borderRadius: '5%'}}
+      />
+    )
     return (
       <Header className="header-container">
         <Row>
           <Col 
             lg={{span: 4}}
             md={{span: 4}}
-            xs={{span: 10}}
+            xs={{span: 0}}
           >
-            <div className="logo" />
+            <div className="logo">
+            </div>
           </Col>
           <Col 
             lg={{span: 14}}
             md={{span: 14}}
             xs={{span: 0}}
           >
-            {/* <h1>Navigation</h1> */}
+            <Navigate
+              menus={menus}
+              mode="horizontal"
+            />
+          </Col>
+          <Col
+            lg={{span: 0}}
+            md={{span: 0}}
+            xs={{span: 10}}
+          >
+             <Dropdown overlay={navigator}>
+                <div className="drop-down">
+                  <Button type="primary" ghost style={{border: 'none'}}>
+                    首页<Icon type="caret-down" />
+                  </Button>
+                </div>
+             </Dropdown>
           </Col>
           <Col 
             lg={{span: 6}}
