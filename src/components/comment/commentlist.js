@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { getDateDiff } from '../../utils/utils'
 import {
   List,
-  Avatar
+  Avatar,
+  Tag
 } from 'antd'
 @connect(
   state => state.blog
@@ -14,10 +16,13 @@ class CommentList extends Component {
         {
           this.props.desc.comments ?
           <List
+            size="small"
             itemLayout="horizontal"
             dataSource={this.props.desc.comments}
             renderItem={item => (
-              <List.Item>
+              <List.Item actions={[
+                <Tag style={{marginRight: 0}}>{getDateDiff(item.createTime)}</Tag>
+              ]}>
                 <List.Item.Meta
                   avatar={
                     <Avatar style={{ color: '#f56a00', backgroundColor: '#fde3cf'}}>
@@ -27,6 +32,7 @@ class CommentList extends Component {
                   title={<span>{item.user.username}</span>}
                   description={item.content}
                 />
+                {/* {getDateDiff(item.createTime)} */}
               </List.Item>
             )}
           /> : null

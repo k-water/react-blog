@@ -49,6 +49,7 @@ export function blog(state=initState, action) {
         ...state,
         commentSize: state.comment.push({
           content: action.newComment,
+          createTime: +Date.now(),
           user: {
             username: action.username
           }
