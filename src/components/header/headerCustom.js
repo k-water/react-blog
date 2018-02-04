@@ -29,11 +29,11 @@ class HeaderCustom extends Component {
       register: false,
       nav: '首页'
     }
+    this.menuClick = this.menuClick.bind(this)
     this.showLoginModal = this.showLoginModal.bind(this)
     this.showRegisterModal = this.showRegisterModal.bind(this)
     this.handleLoginCancel = this.handleLoginCancel.bind(this)
     this.handleRegisterCancel = this.handleRegisterCancel.bind(this)
-    this.menuClick = this.menuClick.bind(this)
   }
   showLoginModal() {
     this.setState({

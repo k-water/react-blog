@@ -64,7 +64,13 @@ class Desc extends Component {
               <Tag color="red" key="author">
                 作者：admin
               </Tag>,
-              <span style={{marginTop: 10}} key="time">{timetrans(this.props.desc.createTime)}</span>
+              <span style={{marginTop: 10}} key="time">
+                {
+                  this.props.desc.createTime 
+                  ? timetrans(this.props.desc.createTime)
+                  : null
+                }
+              </span>
             ]}
             // actions={[<Icon type="like-o" />]}
           >
