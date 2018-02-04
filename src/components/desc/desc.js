@@ -12,7 +12,8 @@ import {
   Icon,
   Tag,
   Row,
-  Col
+  Col,
+  BackTop
 } from 'antd'
 import Comment from '../comment/comment'
 import Navigation from './navigation'
@@ -49,6 +50,7 @@ class Desc extends Component {
     )
     return (
       <Row>
+        <BackTop visibilityHeight={300}/>
         <Col
           lg={{ span: 15, offset: 1 }}
           md={{ span: 15, offset: 1 }}
