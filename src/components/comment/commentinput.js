@@ -22,9 +22,9 @@ class CommentInput extends Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
-  componentDidMount () {
-    this.textarea.focus()
-  }
+  // componentDidMount () {
+  //   this.textarea.focus()
+  // }
   handleChange(event) {
     this.setState({
       commentContent: event.target.value

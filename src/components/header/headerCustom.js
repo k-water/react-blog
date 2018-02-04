@@ -66,13 +66,25 @@ class HeaderCustom extends Component {
     return (
       <Header className="header-container">
         <Row>
-          <Col lg={{span: 4}}>
+          <Col 
+            lg={{span: 4}}
+            md={{span: 4}}
+            xs={{span: 10}}
+          >
             <div className="logo" />
           </Col>
-          <Col lg={{span: 14}} xs={{span: 0}}>
+          <Col 
+            lg={{span: 14}}
+            md={{span: 14}}
+            xs={{span: 0}}
+          >
             {/* <h1>Navigation</h1> */}
           </Col>
-          <Col lg={{span: 6}}>
+          <Col 
+            lg={{span: 6}}
+            md={{span: 6}}
+            xs={{span: 14}}
+          >
             <div 
               className="nav-auth"
               style={{display: this.props.user ? 'none' : 'block'}}

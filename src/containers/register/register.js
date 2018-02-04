@@ -3,7 +3,8 @@ import {
   Modal,
   Input,
   Icon,
-  message
+  message,
+  Button
 } from 'antd'
 import { connect } from 'react-redux'
 import { register } from '../../redux/user.redux'
@@ -52,11 +53,11 @@ class Register extends Component {
       <Modal 
         title="注册"
         visible={this.props.visible}
-        onOk={this.handleOk}
         onCancel={this.props.handleCancel}
         width={320}
+        footer={null}
       >
-        <div className="login-input">
+        <div className="register-input">
           <Input
             style={{marginBottom: 20}}
             prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} 
@@ -65,7 +66,8 @@ class Register extends Component {
             value={this.state.username}
             onChange={this.handleChange}
           />
-          <Input 
+          <Input
+            style={{marginBottom: 20}}
             prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} 
             type="password"
             name="password"
@@ -73,6 +75,17 @@ class Register extends Component {
             value={this.state.password}
             onChange={this.handleChange}
           />
+        </div>
+        <div
+          className="register-submit"
+        >
+          <Button
+            style={{width: '100%'}}
+            type="primary"
+            onClick={this.handleOk}
+          >
+            注册
+          </Button>
         </div>
       </Modal>
     )

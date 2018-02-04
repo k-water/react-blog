@@ -3,7 +3,8 @@ import {
   Modal,
   Input,
   Icon,
-  message
+  message,
+  Button
 } from 'antd'
 import { connect } from 'react-redux'
 import { login } from '../../redux/user.redux'
@@ -51,9 +52,9 @@ class Login extends Component {
       <Modal 
         title="登录"
         visible={this.props.visible}
-        onOk={this.handleOk}
         onCancel={this.props.handleCancel}
         width={320}
+        footer={null}
       >
         <div className="login-input">
           <Input
@@ -64,7 +65,8 @@ class Login extends Component {
             value={this.state.username}
             onChange={this.handleChange}
           />
-          <Input 
+          <Input
+            style={{marginBottom: 20}}
             prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} 
             type="password"
             name="password"
@@ -72,6 +74,17 @@ class Login extends Component {
             value={this.state.password}
             onChange={this.handleChange}
           />
+        </div>
+        <div
+          className="login-submit"
+        >
+          <Button
+            style={{width: '100%'}}
+            type="primary"
+            onClick={this.handleOk}
+          >
+            登录
+          </Button>
         </div>
       </Modal>
     )
