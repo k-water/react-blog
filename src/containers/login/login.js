@@ -7,10 +7,11 @@ import {
   Button
 } from 'antd'
 import { connect } from 'react-redux'
-import { login } from '../../redux/user.redux'
+import axios from 'axios'
+import { loginSuccess, loginFailure } from '../../redux/user.redux'
 @connect(
   state => state.user,
-  { login }
+  { loginSuccess, loginFailure }
 )
 class Login extends Component {
   constructor(props) {
@@ -19,8 +20,31 @@ class Login extends Component {
       username: '',
       password: ''
     }
+    this.login = this.login.bind(this)
     this.handleOk = this.handleOk.bind(this)
     this.handleChange = this.handleChange.bind(this)
+  }
+  login({username, password}) {
+    axios.post('/users/login', {
+      username,
+      password
+    })
+    .then(res => {
+      if(res.status === 200 && res.data.code === 0) {
+        this.props.loginSuccess(res.data)
+        this.props.handleCancel()
+        this.setState({
+          username: '',
+          password: ''
+        })
+      } else {
+        this.props.loginFailure(res.data.message)
+        message.error(res.data.message, 1)
+      }
+    })
+    .catch(err => {
+      console.log(err)
+    })
   }
   handleOk() {
     if(!this.state.username) {
@@ -28,18 +52,7 @@ class Login extends Component {
     } else if(!this.state.password){
       message.warn('密码不能为空')      
     } else {
-      this.props.login(this.state)
-      setTimeout(() => {
-        if (this.props.msg !== 'success') {
-          message.error(this.props.msg, 1)
-        } else {
-          this.props.handleCancel()
-          this.setState({
-            username: '',
-            password: ''
-          })
-        }
-      }, 500)
+      this.login(this.state)
     }
   }
   handleChange(event) {

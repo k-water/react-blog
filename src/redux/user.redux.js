@@ -1,13 +1,13 @@
-import axios from 'axios'
 
 /**
  * type
  */
 
-const LOGIN = 'LOGIN'
+const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
+const LOGIN_FAILURE = 'LOGIN_FAILURE'
 const LOGOUT = 'LOGOUT'
-const REGISTER = 'REGISTER'
-const ERROR_USER = 'ERROR_USER'
+const REGISTER_SUCCESS = 'REGISTER_SUCCESS'
+const REGISTER_FAILURE = 'REGISTER_FAILURE'
 
 /**
  * state
@@ -24,13 +24,13 @@ const initState = {
  */
 export function user(state=initState, action) {
   switch(action.type) {
-    case LOGIN:
+    case LOGIN_SUCCESS:
       return {
         ...state,
         user: action.payload.body,
         msg: action.payload.message
       }
-    case REGISTER:
+    case REGISTER_SUCCESS:
       return {
         ...state,
         user: '',
@@ -41,7 +41,8 @@ export function user(state=initState, action) {
         user: '',
         msg: ''
       }
-    case ERROR_USER:
+    case LOGIN_FAILURE:
+    case REGISTER_FAILURE:
       return {
         ...state,
         user: '',
@@ -56,16 +57,30 @@ export function user(state=initState, action) {
  * action type
  */
 
-function loginType(data) {
+export function loginSuccess(data) {
   return {
-    type: LOGIN,
+    type: LOGIN_SUCCESS,
     payload: data
   }
 }
 
-function registerType(data) {
+export function loginFailure(data) {
   return {
-    type: REGISTER,
+    type: LOGIN_FAILURE,
+    payload: data
+  }
+}
+
+export function registerSuccess(data) {
+  return {
+    type: REGISTER_SUCCESS,
+    payload: data
+  }
+}
+
+export function registerFailue(data) {
+  return {
+    type: REGISTER_FAILURE,
     payload: data
   }
 }
@@ -73,56 +88,5 @@ function registerType(data) {
 export function logout() {
   return {
     type: LOGOUT
-  }
-}
-
-function errorMsg(data) {
-  return {
-    type: ERROR_USER,
-    payload: data
-  }
-}
-
-export function login({
-  username,
-  password
-}) {
-  return dispatch => {
-    axios.post('/users/login', {
-      username,
-      password
-    })
-    .then(res => {
-      if(res.status === 200 && res.data.code === 0) {
-        dispatch(loginType(res.data))
-      } else {
-        dispatch(errorMsg(res.data.message))
-      }
-    })
-    .catch(err => {
-      console.log(err)
-    })
-  }
-}
-
-export function register({
-  username,
-  password
-}) {
-  return dispatch => {
-    axios.post('/users', {
-      username,
-      password
-    })
-    .then(res => {
-      if (res.status === 200 && res.data.code === 0) {
-        dispatch(registerType(res.data))
-      } else {
-        dispatch(errorMsg(res.data.message))
-      }
-    })
-    .catch(err => {
-      console.log(err)
-    })
   }
 }

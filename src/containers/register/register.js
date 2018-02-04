@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import axios from 'axios'
 import {
   Modal,
   Input,
@@ -7,10 +8,10 @@ import {
   Button
 } from 'antd'
 import { connect } from 'react-redux'
-import { register } from '../../redux/user.redux'
+import { registerSuccess, registerFailue } from '../../redux/user.redux'
 @connect(
   state => state.user,
-  { register }
+  { registerSuccess, registerFailue }
 )
 class Register extends Component {
   constructor(props) {
@@ -19,8 +20,32 @@ class Register extends Component {
       username: '',
       password: ''
     }
+    this.register = this.register.bind(this)
     this.handleOk = this.handleOk.bind(this)
     this.handleChange = this.handleChange.bind(this)
+  }
+  register({username, password}) {
+    axios.post('/users', {
+      username,
+      password
+    })
+    .then(res => {
+      if (res.status === 200 && res.data.code === 0) {
+        this.props.registerSuccess(res.data)
+        this.props.handleCancel()
+        message.success('注册成功, 请登录~', 1)
+        this.setState({
+          username: '',
+          password: ''
+        })
+      } else {
+        this.props.registerFailue(res.data.message)
+        message.error(res.data.message, 1)
+      }
+    })
+    .catch(err => {
+      console.log(err)
+    })
   }
   handleOk() {
     if(!this.state.username) {
@@ -28,19 +53,7 @@ class Register extends Component {
     } else if(!this.state.password){
       message.warn('密码不能为空')      
     } else {
-      this.props.register(this.state)
-      setTimeout(() => {
-        if (this.props.msg !== 'success') {
-          message.error(this.props.msg, 1)
-        } else {
-          this.props.handleCancel()
-          message.success('注册成功, 请登录~', 1)
-          this.setState({
-            username: '',
-            password: ''
-          })
-        }
-      }, 500)
+      this.register(this.state)
     }
   }
   handleChange(event) {
