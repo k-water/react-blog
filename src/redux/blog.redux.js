@@ -3,10 +3,12 @@ import axios from 'axios'
 /**
  * action type
  */
-const LIST = 'LIST'
-const DESC = 'DESC'
-const ERROR_BLOG = 'ERROR_BLOG'
-const CREATE = 'CREATE'
+const LIST_SUCCESS = 'LIST_SUCCESS'
+const LIST_FAILURE = 'LIST_FAILURE'
+const DESC_SUCCESS = 'DESC_SUCCESS'
+const DESC_FAILURE = 'DESC_FAILURE'
+const COMMENT_SUCCESS = 'COMMENT_SUCCESS'
+const COMMENT_FAILURE = 'COMMENT_FAILURE'
 /**
  * state
  */
@@ -26,7 +28,7 @@ const initState = {
  */
 export function blog(state=initState, action) {
   switch(action.type) {
-    case LIST:
+    case LIST_SUCCESS:
       return {
         ...state,
         desc: '',
@@ -36,7 +38,7 @@ export function blog(state=initState, action) {
         msg: action.payload.message,
         ...action.payload.body.data
       }
-    case DESC:
+    case DESC_SUCCESS:
       return {
         ...state,
         tags: action.payload.body.data.tags,
@@ -44,7 +46,7 @@ export function blog(state=initState, action) {
         msg: action.payload.message,
         comment: action.payload.body.data.comments
       }
-    case CREATE:
+    case COMMENT_SUCCESS:
       return {
         ...state,
         commentSize: state.comment.push({
@@ -55,7 +57,9 @@ export function blog(state=initState, action) {
           }
         })
       }
-    case ERROR_BLOG:
+    case LIST_FAILURE:
+    case DESC_FAILURE:
+    case COMMENT_FAILURE:
       return {
         ...state,
         msg: action.payload
@@ -66,35 +70,49 @@ export function blog(state=initState, action) {
 }
 
 /**
- * return action type
+ * action type
  */
 
-function getList(data) {
+function listSuccess(data) {
   return {
-    type: LIST,
+    type: LIST_SUCCESS,
     payload: data
   }
 }
 
-function getDesc(data) {
+function listFailure(data) {
   return {
-    type: DESC,
+    type: LIST_FAILURE,
     payload: data
   }
 }
 
-function createType(data, comment, username) {
+function descSuccess(data) {
   return {
-    type: CREATE,
+    type: DESC_SUCCESS,
+    payload: data
+  }
+}
+
+function descFailure(data) {
+  return {
+    type: DESC_FAILURE,
+    payload: data
+  }
+}
+
+function commentSuccess(data, comment, username) {
+  return {
+    type: COMMENT_SUCCESS,
     payload: data,
     newComment: comment,
     username: username
   }
 }
 
-function errorMsg(data) {
+function commentFailure(data) {
   return {
-    type: ERROR_BLOG,
+    type: COMMENT_FAILURE,
     payload: data
   }
 }
@@ -118,9 +136,9 @@ export function getBlogList(
     })
       .then(res => {
         if (res.status === 200 && res.data.code === 0) {
-          dispatch(getList(res.data))
+          dispatch(listSuccess(res.data))
         } else {
-          dispatch(errorMsg(res.data.message))
+          dispatch(listFailure(res.data.message))
         }
       })
       .catch(err => {
@@ -134,9 +152,9 @@ export function getBlogDesc(id) {
     axios.get(`/u/admin/blogs/edit/${id}`)
       .then(res => {
         if (res.status === 200 && res.data.code === 0) {
-          dispatch(getDesc(res.data))
+          dispatch(descSuccess(res.data))
         } else {
-          dispatch(errorMsg(res.data.message))
+          dispatch(descFailure(res.data.message))
         }
       })
       .catch(err => {
@@ -163,10 +181,9 @@ export function createComment({
     })
     .then(res => {
       if(res.status === 200 && res.data.code === 0) {
-        console.log(commentContent)
-        dispatch(createType(res.data, commentContent, username))
+        dispatch(commentSuccess(res.data, commentContent, username))
       } else {
-        dispatch(errorMsg(res.data.message))
+        dispatch(commentFailure(res.data.message))
       }
     })
     .catch(err => {
