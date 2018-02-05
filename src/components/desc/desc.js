@@ -75,6 +75,7 @@ class Desc extends Component {
             // actions={[<Icon type="like-o" />]}
           >
             <div className="article-tags">
+              <span>{this.props.desc.readSize} 次浏览</span>
               <IconText type="tags-o" text={
                 this.props.tags.split(',').map(v => (
                   <Tag

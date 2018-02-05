@@ -149,7 +149,7 @@ export function getBlogList(
 
 export function getBlogDesc(id) {
   return dispatch => {
-    axios.get(`/u/admin/blogs/edit/${id}`)
+    axios.get(`/u/admin/blogs/${id}`)
       .then(res => {
         if (res.status === 200 && res.data.code === 0) {
           dispatch(descSuccess(res.data))
