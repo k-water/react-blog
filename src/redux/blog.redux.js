@@ -121,17 +121,21 @@ function commentFailure(data) {
  * aysnc function
  */
 
-export function getBlogList(
-  order = '',
-  catalogId = '',
-  keyword = '',
-  pageIndex = 0,
-  pageSize = 10
-) {
+export function getBlogList({
+  order,
+  catalogId,
+  keyword,
+  pageIndex,
+  pageSize
+}) {
   return dispatch => {
     axios.get('/u/admin/blogs', {
       params: {
-        pageIndex: pageIndex
+        order,
+        catalogId,
+        keyword,
+        pageIndex,
+        pageSize
       }
     })
       .then(res => {

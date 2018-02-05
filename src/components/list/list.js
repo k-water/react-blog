@@ -21,22 +21,37 @@ class BlogList extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      current: 1
+      currentPage: 1
     }
   }
   componentDidMount() {
-    this.props.getBlogList()
+    const tags = this.props.match.params.tags
+    let params = {
+      order: '',
+      catalogId: '',
+      keyword: tags ? tags : '',
+      pageIndex: 0,
+      pageSize: 5
+    }
+    this.props.getBlogList(params)
   }
   render() {
     const pagination = {
-      pageSize: 10,
-      current: this.state.current,
+      pageSize: 5,
+      current: this.state.currentPage,
       total: this.props.totalElements,
       onChange: ((page, pageSize) => {
         this.setState({
-          current: page
+          currentPage: page
         })
-        this.props.getBlogList(page - 1)
+        let params = {
+          order: '',
+          catalogId: '',
+          keyword: '',
+          pageIndex: page - 1,
+          pageSize: pageSize
+        }
+        this.props.getBlogList(params)
       })
     }
     const IconText = ({ type, text }) => (
@@ -69,7 +84,7 @@ class BlogList extends Component {
                       <Tag
                         key={item.id + Math.random()}
                         color={color[Math.floor(Math.random()*color.length)]}
-                        onClick={()=>{}}
+                        onClick={()=>this.props.history.push(`/app/index/${v}`)}
                       >
                         {v}
                       </Tag>
