@@ -365,8 +365,13 @@
 .article-wrapper .ant-card-body {
   padding-top: 12px;
 }
-.article-wrapper .ant-card-head-title {
-  font-size: 1.5em;
+
+@media only screen 
+  and (min-device-width: 768px) 
+  and (-webkit-min-device-pixel-ratio: 1) {
+    .article-wrapper .ant-card-head-title {
+      font-size: 1.5em;
+    }
 }
 .article-wrapper .ant-card-extra {
   display: flex;

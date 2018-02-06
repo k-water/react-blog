@@ -1,0 +1,15 @@
+.archive-wrapper .archive-list {
+  background: #fffffffb;
+  padding: 10px 25px;
+}
+.archive-wrapper .ant-list-item {
+  padding-bottom: 0;
+}
+.archive-wrapper .ant-list-item-meta-description {
+  color: black;
+}
+.archive-wrapper .ant-list-header {
+  font-size: 1.5em;
+  color: black;
+  padding-top: 0;
+}
