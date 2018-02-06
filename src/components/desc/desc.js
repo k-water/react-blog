@@ -72,7 +72,6 @@ class Desc extends Component {
                 }
               </span>
             ]}
-            // actions={[<Icon type="like-o" />]}
           >
             <div className="article-tags">
               <span>{this.props.desc.readSize} 次浏览</span>
@@ -90,7 +89,7 @@ class Desc extends Component {
             </div>
             <div 
               className="article-detail" 
-              dangerouslySetInnerHTML={{ __html: marked(this.props.desc.content) }} 
+              dangerouslySetInnerHTML={{ __html: this.props.desc.content ? marked(this.props.desc.content) : null }} 
             />
           </Card>
           <Comment />
