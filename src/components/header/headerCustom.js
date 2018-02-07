@@ -144,7 +144,7 @@ class HeaderCustom extends Component {
 
             <div 
               className="user-info"
-              style={{display: this.props.user ? 'block' : 'none'}}
+              style={{display: this.props.user ? 'flex' : 'none'}}
             >
               <Dropdown
                 placement="bottomCenter"

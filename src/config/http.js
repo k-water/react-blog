@@ -3,9 +3,13 @@ import '../../node_modules/nprogress/nprogress.css'
 import NProgress from 'nprogress'
 import qs from 'qs'
 
+const API = {
+  ROOT: process.env.NODE_ENV === 'development' ? '/' : '/'
+}
+axios.defaults.baseURL = API.ROOT
 axios.interceptors.request.use(function (config) {
-  if(config.method  === 'post'){
-    config.data = qs.stringify(config.data);
+  if (config.method === 'post') {
+    config.data = qs.stringify(config.data)
   }
   NProgress.start()
   return config

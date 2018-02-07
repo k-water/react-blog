@@ -11,8 +11,8 @@
 } 
 
 .user-info {
-  float: right;
-  margin-top: -3px;
+  flex-direction: row-reverse;
+  margin-top: 12px;
 }
 .user-info .user-avatar {
   border-radius: 50%;
