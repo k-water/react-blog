@@ -4,7 +4,7 @@ import NProgress from 'nprogress'
 import qs from 'qs'
 
 const API = {
-  ROOT: process.env.NODE_ENV === 'development' ? '/' : '/'
+  ROOT: process.env.NODE_ENV === 'development' ? '/' : 'http://119.29.151.195:8080'
 }
 axios.defaults.baseURL = API.ROOT
 axios.interceptors.request.use(function (config) {

@@ -9,6 +9,7 @@ import {
   Avatar,
   Icon
 } from 'antd'
+import Cookies from 'js-cookie'
 import { connect } from 'react-redux'
 import Login from '../../containers/login/login'
 import Register from '../../containers/register/register'
@@ -66,7 +67,10 @@ class HeaderCustom extends Component {
         <Menu.Item>
           <span 
             className="user-logout"
-            onClick={this.props.logout}
+            onClick={() => {
+              Cookies.remove('token')
+              this.props.logout()
+            }}
           >
             退出登录
           </span>
@@ -80,6 +84,7 @@ class HeaderCustom extends Component {
         style={{width: 90, borderRadius: '5%'}}
       />
     )
+    console.log(Cookies.get('token'))
     return (
       <Header className="header-container">
         <Row>
@@ -121,7 +126,7 @@ class HeaderCustom extends Component {
           >
             <div 
               className="nav-auth"
-              style={{display: this.props.user ? 'none' : 'block'}}
+              style={{display: Cookies.get('token') ? 'none' : 'block'}}
             >
               <Button 
                 ghost 
@@ -144,7 +149,7 @@ class HeaderCustom extends Component {
 
             <div 
               className="user-info"
-              style={{display: this.props.user ? 'flex' : 'none'}}
+              style={{display: Cookies.get('token') ? 'flex' : 'none'}}
             >
               <Dropdown
                 placement="bottomCenter"

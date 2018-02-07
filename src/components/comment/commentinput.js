@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import Cookies from 'js-cookie'
 import {
   Card,
   Input,
@@ -22,9 +23,6 @@ class CommentInput extends Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
-  // componentDidMount () {
-  //   this.textarea.focus()
-  // }
   handleChange(event) {
     this.setState({
       commentContent: event.target.value
@@ -33,7 +31,7 @@ class CommentInput extends Component {
   handleSubmit() {
     if(!this.state.commentContent) {
       message.error('请先输入内容', 1)
-    } else if(!this.props.user.user) {
+    } else if(!Cookies.get('token')) {
       message.error('请先登录', 1)
     } else {
       const blogId = this.props.match.params.id

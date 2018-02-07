@@ -14,7 +14,8 @@ const REGISTER_FAILURE = 'REGISTER_FAILURE'
  */
 const initState = {
   user: '',
-  msg: ''
+  msg: '',
+  refresh: 1
 }
 
 /**
@@ -39,7 +40,8 @@ export function user(state=initState, action) {
     case LOGOUT:
       return {
         user: '',
-        msg: ''
+        msg: '',
+        refresh: 0
       }
     case LOGIN_FAILURE:
     case REGISTER_FAILURE:
