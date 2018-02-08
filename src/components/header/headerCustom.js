@@ -84,7 +84,6 @@ class HeaderCustom extends Component {
         style={{width: 90, borderRadius: '5%'}}
       />
     )
-    console.log(Cookies.get('token'))
     return (
       <Header className="header-container">
         <Row>

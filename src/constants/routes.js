@@ -6,8 +6,12 @@ export const routes = [{
   path: '/app/index',
   component: BlogList
 }, {
-  key: '标签搜索页',
-  path: '/app/index/:tags',
+  key: '标签搜索',
+  path: '/app/tags/:tags',
+  component: BlogList
+}, {
+  key: '分类搜索',
+  path: '/app/catalog/:catalog',
   component: BlogList
 }, {
   key: '归档',

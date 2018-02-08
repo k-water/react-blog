@@ -26,9 +26,10 @@ class BlogList extends Component {
   }
   componentDidMount() {
     const tags = this.props.match.params.tags
+    const catalog = this.props.match.params.catalog
     let params = {
       order: '',
-      catalogId: '',
+      catalogId: catalog ? catalog : '',
       keyword: tags ? tags : '',
       pageIndex: 0,
       pageSize: 5
@@ -77,19 +78,29 @@ class BlogList extends Component {
               <List.Item
                 key={item.title}
                 actions={
-                  [<IconText type="like-o" text={item.voteSize} />, 
+                [ 
                   <IconText type="message" text={item.commentSize} />,
                   <IconText type="tags-o" text={
                     item.tags.split(',').map(v => (
                       <Tag
                         key={item.id + Math.random()}
                         color={color[Math.floor(Math.random()*color.length)]}
-                        onClick={()=>this.props.history.push(`/app/index/${v}`)}
+                        onClick={()=>this.props.history.push(`/app/tags/${v}`)}
                       >
                         {v}
                       </Tag>
                   ))
-                  } />
+                  } />,
+                  item.catalog ?
+                  <IconText type="folder" text={
+                    <Tag
+                      color="orange"
+                      key={item.catalog.id}
+                      onClick={()=>this.props.history.push(`/app/catalog/${item.catalog.id}`)}
+                    >
+                      {item.catalog.name}
+                    </Tag>
+                  }/> : null
                 ]}
                 extra={[
                   timetrans(item.createTime)
