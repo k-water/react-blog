@@ -35,7 +35,7 @@ class Index extends Component {
           <Footer
             style={{textAlign: 'center'}}
           >
-            Blog website ©2018 Created by Water
+            Copyright © Water 2018
           </Footer>
         </Layout>
       </Layout>
