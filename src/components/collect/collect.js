@@ -56,40 +56,51 @@ class Collect extends Component {
       }),
     }
     return (
-      <Row>
-        <Col
-          lg={{ span: 15, offset: 1 }}
-          md={{ span: 15, offset: 1 }}
-          xs={{ span: 24 }}
-        >
-          <List
-            className="collect-list"
-            header={<div className="collect-header">文章收藏</div>}
-            itemLayout="vertical"
-            size="small"
-            pagination={pagination}
-            dataSource={this.state.data}
-            renderItem={item => (
-              <List.Item
-                key={item.title}
-                extra={item.date}
-              >
-                <List.Item.Meta
-                  title={<a href={item.link}>{item.title}</a>}
-                  description={item.author}
-                />
-              </List.Item>
-            )}
-          />
-        </Col>
-        <Col
-          lg={{ span: 6, offset: 1 }}
-          md={{ span: 6, offset: 1 }}
-          xs={{ span: 0 }}
-        >
-          <SiderCustom />
-        </Col>
-      </Row>
+      <div>
+        <Row>
+          <Col
+            lg={{ span: 15, offset: 1 }}
+            md={{ span: 15, offset: 1 }}
+            xs={{ span: 24 }}
+          >
+            <List
+              className="collect-list"
+              header={<div className="collect-header">文章收藏</div>}
+              itemLayout="vertical"
+              size="small"
+              pagination={pagination}
+              dataSource={this.state.data}
+              renderItem={item => (
+                <List.Item
+                  key={item.title}
+                  extra={item.date}
+                >
+                  <List.Item.Meta
+                    title={<a href={item.link}>{item.title}</a>}
+                    description={item.author}
+                  />
+                </List.Item>
+              )}
+            />
+          </Col>
+          <Col
+            lg={{ span: 6, offset: 1 }}
+            md={{ span: 6, offset: 1 }}
+            xs={{ span: 0 }}
+          >
+            <SiderCustom />
+          </Col>
+        </Row>
+        <Row style={{marginTop: 20}}>
+          <Col
+            lg={{ span: 0 }}
+            md={{ span: 0 }}
+            xs={{ span: 24 }}
+          >
+            <SiderCustom />
+          </Col>
+        </Row>
+      </div>
     )
   }
 }

@@ -60,6 +60,7 @@ class HeaderCustom extends Component {
     this.setState({
       nav: key
     })
+    
   }
   render() {
     const menu = (
@@ -110,10 +111,10 @@ class HeaderCustom extends Component {
             md={{span: 0}}
             xs={{span: 10}}
           >
-             <Dropdown overlay={navigator}>
+             <Dropdown overlay={navigator} trigger={['click']}>
                 <div className="drop-down">
                   <Button type="primary" ghost style={{border: 'none'}}>
-                    首页<Icon type="caret-down" />
+                    {this.state.nav}<Icon type="caret-down" />
                   </Button>
                 </div>
              </Dropdown>
