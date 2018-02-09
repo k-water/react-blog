@@ -1,0 +1,14 @@
+.collect-header {
+  color: #000;
+  font-size: 1.5em;
+}
+.collect-list {
+  background: #fff;
+  padding: 20px 30px;
+}
+.collect-list .ant-list-item .ant-list-item-main{
+  height: 52px;
+}
+.collect-list .ant-list-item .ant-list-item-meta-title {
+  margin-bottom: 5px;
+}

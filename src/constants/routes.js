@@ -2,6 +2,7 @@ import BlogList from '../components/list/list'
 import Desc from '../components/desc/desc'
 import Archive from '../components/archive/archive'
 import About from '../components/about/about'
+import Collect from '../components/collect/collect'
 export const routes = [{
   key: '首页',
   path: '/app/index',
@@ -22,6 +23,10 @@ export const routes = [{
   key: '博客详情',
   path: '/app/blog/desc/:id',
   component: Desc
+}, {
+  key: '文章收藏',
+  path: '/app/collect',
+  component: Collect
 }, {
   key: '关于我',
   path: '/app/about',
