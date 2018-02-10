@@ -3,9 +3,11 @@ import {
   Row,
   Col,
   message,
-  List
+  List,
+  Tag
 } from 'antd'
 import axios from 'axios'
+import { color } from '../../utils/utils'
 import SiderCustom from '../sider/siderCustom'
 import './collect.css'
 class Collect extends Component {
@@ -67,7 +69,6 @@ class Collect extends Component {
               className="collect-list"
               header={<div className="collect-header">文章收藏</div>}
               itemLayout="vertical"
-              size="small"
               pagination={pagination}
               dataSource={this.state.data}
               renderItem={item => (
@@ -76,8 +77,14 @@ class Collect extends Component {
                   extra={item.date}
                 >
                   <List.Item.Meta
-                    title={<a href={item.link}>{item.title}</a>}
-                    description={item.author}
+                    description={[<a href={item.link}>{item.title}</a>, 
+                      <Tag 
+                        className="article-author"
+                        color={color[Math.floor(Math.random()*color.length)]}
+                      >
+                        {item.author}
+                      </Tag>
+                    ]}
                   />
                 </List.Item>
               )}
