@@ -8,6 +8,9 @@ import {
 import './about.css'
 import SiderCustom from '../sider/siderCustom'
 class About extends Component {
+  componentDidMount() {
+    document.title = 'Water Blog'
+  }
   render() {
     return (
       <div>

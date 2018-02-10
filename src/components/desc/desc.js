@@ -48,6 +48,9 @@ class Desc extends Component {
         {text}
       </span>
     )
+    if (this.props.desc.title) {
+      document.title = this.props.desc.title
+    }
     return (
       <Row>
         <BackTop visibilityHeight={300}/>

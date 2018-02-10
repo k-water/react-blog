@@ -20,6 +20,7 @@ class Archive extends Component {
     this.getBlogByYear = this.getBlogByYear.bind(this)
   }
   componentDidMount() {
+    document.title = 'Water Blog'
     this.getBlogByYear(this.state.year)
   }
   getBlogByYear(year) {

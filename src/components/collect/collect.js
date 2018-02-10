@@ -22,6 +22,7 @@ class Collect extends Component {
   }
 
   componentDidMount() {
+    document.title = 'Water Blog' 
     this.getCollectList()
   }
   getCollectList(pageIndex = 0, pageSize = 10) {
@@ -77,8 +78,9 @@ class Collect extends Component {
                   extra={item.date}
                 >
                   <List.Item.Meta
-                    description={[<a href={item.link}>{item.title}</a>, 
-                      <Tag 
+                    description={[<a key={item.link} href={item.link}>{item.title}</a>, 
+                      <Tag
+                        key={item.id}
                         className="article-author"
                         color={color[Math.floor(Math.random()*color.length)]}
                       >

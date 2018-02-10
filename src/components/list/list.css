@@ -16,7 +16,6 @@
 .list-item {
   cursor: pointer;
 }
-/* .ant-list-item-extra {
-  display: flex;
-  flex-direction: column;
-} */
+.list-wrapper .ant-list-vertical .ant-list-item-action>li {
+  padding: 0 8px;
+}

@@ -25,6 +25,7 @@ class BlogList extends Component {
     }
   }
   componentDidMount() {
+    document.title = 'Water Blog'
     const tags = this.props.match.params.tags
     const catalog = this.props.match.params.catalog
     let params = {
