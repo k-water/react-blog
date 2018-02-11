@@ -6,7 +6,7 @@
 > **项目地址**：https://github.com/k-water/react-blog
  如果觉得不错的话，您可以点右上角 "Star" 支持一下 谢谢！ ^_^
 
-> **线上访问**： http://www.nolin.info
+> **线上访问**： http://119.29.151.195
 
 ### 技术栈
 **前端**
