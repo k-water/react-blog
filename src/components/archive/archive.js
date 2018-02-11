@@ -66,7 +66,7 @@ class Archive extends Component {
               itemLayout="vertical"
               header={this.state.year}
               pagination={pagination}
-              dataSource={this.state.data.content}
+              dataSource={this.state.data}
               className="archive-list"
               renderItem={item => (
                 <List.Item
