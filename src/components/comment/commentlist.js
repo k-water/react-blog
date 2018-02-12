@@ -32,7 +32,6 @@ class CommentList extends Component {
                   title={<span>{item.user.username}</span>}
                   description={item.content}
                 />
-                {/* {getDateDiff(item.createTime)} */}
               </List.Item>
             )}
           /> : null

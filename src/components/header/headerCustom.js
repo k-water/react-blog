@@ -9,6 +9,7 @@ import {
   Avatar,
   Icon
 } from 'antd'
+import Cookies from 'js-cookie'
 import { connect } from 'react-redux'
 import Login from '../../containers/login/login'
 import Register from '../../containers/register/register'
@@ -68,6 +69,9 @@ class HeaderCustom extends Component {
           <span 
             className="user-logout"
             onClick={() => {
+              Cookies.remove("token")
+              Cookies.remove("username")
+              Cookies.remove("userId")
               this.props.logout()
             }}
           >
@@ -108,9 +112,10 @@ class HeaderCustom extends Component {
             lg={{span: 0}}
             md={{span: 0}}
             xs={{span: 10}}
+            className="drop-down"
           >
              <Dropdown overlay={navigator} trigger={['click']}>
-                <div className="drop-down">
+                <div>
                   <Button type="primary" ghost style={{border: 'none'}}>
                     {this.state.nav}<Icon type="caret-down" />
                   </Button>
@@ -124,7 +129,7 @@ class HeaderCustom extends Component {
           >
             <div 
               className="nav-auth"
-              style={{display: this.props.user ? 'none' : 'block'}}
+              style={{display: Cookies.get("token") ? 'none' : 'block'}}
             >
               <Button 
                 ghost 
@@ -147,7 +152,7 @@ class HeaderCustom extends Component {
 
             <div 
               className="user-info"
-              style={{display: this.props.user ? 'flex' : 'none'}}
+              style={{display: Cookies.get("token") ? 'flex' : 'none'}}
             >
               <Dropdown
                 placement="bottomCenter"
@@ -156,10 +161,11 @@ class HeaderCustom extends Component {
                 <Avatar
                   className="user-avatar"
                   shape="square" 
-                  size="large" 
-                  icon="user"
-                  style={{backgroundColor: '#87d068'}}
-                />
+                  size="large"
+                  style={{backgroundColor: 'rgb(255, 191, 0)'}}
+                >
+                  {Cookies.get("username") ? Cookies.get("username")[0] : null}
+                </Avatar>
               </Dropdown>
             </div>
           </Col>

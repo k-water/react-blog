@@ -42,6 +42,7 @@ class BlogList extends Component {
       pageSize: 5,
       current: this.state.currentPage,
       total: this.props.totalElements,
+      size: 'small',
       onChange: ((page, pageSize) => {
         this.setState({
           currentPage: page

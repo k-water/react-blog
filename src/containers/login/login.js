@@ -28,7 +28,7 @@ class Login extends Component {
     axios.post('/users/login', {
       username,
       password
-    })
+    }, {withCredentials:true})
     .then(res => {
       if(res.status === 200 && res.data.code === 0) {
         this.props.loginSuccess(res.data)

@@ -31,12 +31,12 @@ class CommentInput extends Component {
   handleSubmit() {
     if(!this.state.commentContent) {
       message.error('请先输入内容', 1)
-    } else if(!Cookies.get('token')) {
+    } else if(!Cookies.get("token")) {
       message.error('请先登录', 1)
     } else {
       const blogId = this.props.match.params.id
-      const userId = this.props.user.user.user.id
-      const username = this.props.user.user.user.username
+      const userId = Cookies.get("userId")
+      const username = Cookies.get("username")
       const commentContent = this.state.commentContent
       this.props.createComment({
         blogId,
