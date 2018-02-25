@@ -38,6 +38,8 @@ class BlogList extends Component {
     this.props.getBlogList(params)
   }
   render() {
+    const tags = this.props.match.params.tags
+    const catalog = this.props.match.params.catalog
     const pagination = {
       pageSize: 5,
       current: this.state.currentPage,
@@ -49,8 +51,8 @@ class BlogList extends Component {
         })
         let params = {
           order: '',
-          catalogId: '',
-          keyword: '',
+          catalogId: catalog ? catalog : '',
+          keyword: tags ? tags : '',
           pageIndex: page - 1,
           pageSize: pageSize
         }
