@@ -69,8 +69,8 @@ class Desc extends Component {
               </Tag>,
               <span style={{marginTop: 10}} key="time">
                 {
-                  this.props.desc.createTime 
-                  ? timetrans(this.props.desc.createTime)
+                  this.props.desc.created_at
+                  ? timetrans(this.props.desc.created_at)
                   : null
                 }
               </span>

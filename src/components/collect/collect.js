@@ -25,21 +25,21 @@ class Collect extends Component {
     document.title = 'Water Blog' 
     this.getCollectList()
   }
-  getCollectList(pageIndex = 0, pageSize = 10) {
-    axios.get('/u/star', {
+  getCollectList(offset = 0, limit = 10) {
+    axios.get('/api/collect', {
       params: {
-        pageIndex: pageIndex,
-        pageSize: pageSize
+        offset,
+        limit
       }
     })
     .then(res => {
       if (res.status === 200 && res.data.code === 0) {
         this.setState({
-          data: res.data.body.data.content,
-          totalElements: res.data.body.data.totalElements
+          data: res.data.data,
+          totalElements: res.data.data.count
         })
       } else {
-        message.error(res.data.message)
+        message.error(res.data.msg)
       }
     })
     .catch(err => {
@@ -49,13 +49,14 @@ class Collect extends Component {
   render() {
     const pagination = {
       pageSize: 10,
+      size: 'small',
       current: this.state.currentPage,
       total: this.state.totalElements,
       onChange: ((page, pageSize) => {
         this.setState({
           currentPage: page
         })
-        this.getCollectList(page - 1)
+        this.getCollectList(pageSize * (page - 1))
       }),
     }
     return (
@@ -71,7 +72,7 @@ class Collect extends Component {
               header={<div className="collect-header">文章收藏</div>}
               itemLayout="vertical"
               pagination={pagination}
-              dataSource={this.state.data}
+              dataSource={this.state.data.rows}
               renderItem={item => (
                 <List.Item
                   key={item.title}

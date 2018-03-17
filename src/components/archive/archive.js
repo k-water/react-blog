@@ -24,7 +24,7 @@ class Archive extends Component {
     this.getBlogByYear(this.state.year)
   }
   getBlogByYear(year) {
-    axios.get('/u/admin/blogs/archive', {
+    axios.get('/api/archive', {
       params: {
         year: year
       }
@@ -32,8 +32,8 @@ class Archive extends Component {
     .then(res => {
       if(res.status === 200 && res.data.code === 0) {
         this.setState({
-          data: res.data.body.data,
-          year: res.data.body.year
+          data: res.data.data,
+          year: res.data.year
         })
       }
     })
@@ -46,6 +46,7 @@ class Archive extends Component {
       pageSize: 1,
       current: this.state.currentPage,
       total: archive.length,
+      size: 'small',
       onChange: ((page, pageSize) => {
         this.setState({
           currentPage: page
@@ -66,12 +67,12 @@ class Archive extends Component {
               itemLayout="vertical"
               header={this.state.year}
               pagination={pagination}
-              dataSource={this.state.data}
+              dataSource={this.state.data.rows}
               className="archive-list"
               renderItem={item => (
                 <List.Item
                   key={item.title}
-                  extra={timetrans(item.createTime)}
+                  extra={timetrans(item.created_at)}
                   style={{cursor: 'pointer'}}
                 >
                   <List.Item.Meta

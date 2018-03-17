@@ -18,34 +18,34 @@ class CommentInput extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      commentContent: ''
+      content: ''
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
   handleChange(event) {
     this.setState({
-      commentContent: event.target.value
+      content: event.target.value
     })
   }
   handleSubmit() {
-    if(!this.state.commentContent) {
+    if(!this.state.content) {
       message.error('请先输入内容', 1)
     } else if(!Cookies.get("token")) {
       message.error('请先登录', 1)
     } else {
-      const blogId = this.props.match.params.id
-      const userId = Cookies.get("userId")
-      const username = Cookies.get("username")
-      const commentContent = this.state.commentContent
+      const blog_id = this.props.match.params.id
+      const user_id = Cookies.get('user_id')
+      const username = Cookies.get('username')
+      const content = this.state.content
       this.props.createComment({
-        blogId,
-        userId,
-        commentContent,
+        blog_id,
+        user_id,
+        content,
         username
       })
       this.setState({
-        commentContent: ''
+        content: ''
       })
     }
   }
@@ -56,7 +56,7 @@ class CommentInput extends Component {
           <TextArea 
             rows={4}
             autosize={{minRows: 3}}
-            value={this.state.commentContent}
+            value={this.state.content}
             ref={(textarea) => this.textarea = textarea}
             onChange={this.handleChange}
           />

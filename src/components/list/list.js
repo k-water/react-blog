@@ -29,11 +29,11 @@ class BlogList extends Component {
     const tags = this.props.match.params.tags
     const catalog = this.props.match.params.catalog
     let params = {
-      order: '',
-      catalogId: catalog ? catalog : '',
-      keyword: tags ? tags : '',
-      pageIndex: 0,
-      pageSize: 5
+      offset: 0,
+      limit: 5,
+      tags: tags ? tags : '',
+      catalog_id: catalog ? parseInt(catalog, 10) : '',
+      order: 'DESC',
     }
     this.props.getBlogList(params)
   }
@@ -50,11 +50,11 @@ class BlogList extends Component {
           currentPage: page
         })
         let params = {
-          order: '',
-          catalogId: catalog ? catalog : '',
-          keyword: tags ? tags : '',
-          pageIndex: page - 1,
-          pageSize: pageSize
+          offset: pageSize * (page - 1),
+          limit: 5,
+          tags: tags ? tags : '',
+          catalog_id: catalog ? parseInt(catalog, 10) : '',
+          order: 'DESC'
         }
         this.props.getBlogList(params)
       })
@@ -108,7 +108,7 @@ class BlogList extends Component {
                     }/> : null
                   ]}
                   extra={[
-                    timetrans(item.createTime)
+                    timetrans(item.created_at)
                   ]}
                 >
                   <List.Item.Meta

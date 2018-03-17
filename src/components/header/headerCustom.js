@@ -71,7 +71,7 @@ class HeaderCustom extends Component {
             onClick={() => {
               Cookies.remove("token")
               Cookies.remove("username")
-              Cookies.remove("userId")
+              Cookies.remove("user_id")
               this.props.logout()
             }}
           >

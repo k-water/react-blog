@@ -25,12 +25,12 @@ class Register extends Component {
     this.handleChange = this.handleChange.bind(this)
   }
   register({username, password}) {
-    axios.post('/users', {
+    axios.post('/api/users', {
       username,
       password
     })
     .then(res => {
-      if (res.status === 200 && res.data.code === 0) {
+      if (res.status === 201 && res.data.code === 0) {
         this.props.registerSuccess(res.data)
         this.props.handleCancel()
         message.success('注册成功, 请登录~', 1)
@@ -39,8 +39,8 @@ class Register extends Component {
           password: ''
         })
       } else {
-        this.props.registerFailue(res.data.message)
-        message.error(res.data.message, 1)
+        this.props.registerFailue(res.data.msg)
+        message.error(res.data.msg, 1)
       }
     })
     .catch(err => {

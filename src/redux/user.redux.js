@@ -28,14 +28,14 @@ export function user(state=initState, action) {
     case LOGIN_SUCCESS:
       return {
         ...state,
-        user: action.payload.body,
-        msg: action.payload.message
+        user: action.payload.data,
+        msg: action.payload.msg
       }
     case REGISTER_SUCCESS:
       return {
         ...state,
         user: '',
-        msg: action.payload.message
+        msg: action.payload.msg
       }
     case LOGOUT:
       return {

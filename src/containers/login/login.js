@@ -25,10 +25,10 @@ class Login extends Component {
     this.handleChange = this.handleChange.bind(this)
   }
   login({username, password}) {
-    axios.post('/users/login', {
+    axios.post('/api/users/login', {
       username,
       password
-    }, {withCredentials:true})
+    }, { withCredentials: true })
     .then(res => {
       if(res.status === 200 && res.data.code === 0) {
         this.props.loginSuccess(res.data)
@@ -38,8 +38,8 @@ class Login extends Component {
           password: ''
         })
       } else {
-        this.props.loginFailure(res.data.message)
-        message.error(res.data.message, 1)
+        this.props.loginFailure(res.data.msg)
+        message.error(res.data.msg, 1)
       }
     })
     .catch(err => {

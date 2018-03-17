@@ -14,14 +14,14 @@ class CommentList extends Component {
     return (
       <div className="comment-list">
         {
-          this.props.desc.comments ?
+          this.props.desc.comment ?
           <List
             size="small"
             itemLayout="horizontal"
-            dataSource={this.props.desc.comments}
+            dataSource={this.props.desc.comment}
             renderItem={item => (
               <List.Item actions={[
-                <Tag style={{marginRight: 0}}>{getDateDiff(item.createTime)}</Tag>
+                <Tag style={{marginRight: 0}}>{getDateDiff(+new Date(item.created_at))}</Tag>
               ]}>
                 <List.Item.Meta
                   avatar={

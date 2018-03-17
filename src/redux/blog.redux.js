@@ -17,8 +17,8 @@ const initState = {
   msg: '',
   tags: '',
   desc: '',
-  comment: '',
-  commentSize: ''
+  commentSize: '',
+  totalElements: 0
 }
 
 /**
@@ -31,27 +31,23 @@ export function blog(state=initState, action) {
     case LIST_SUCCESS:
       return {
         ...state,
-        desc: '',
-        comment: '',
-        commentSize: '',
-        content: action.payload.body.data.content,
-        msg: action.payload.message,
-        ...action.payload.body.data
+        content: action.payload.data.rows,
+        msg: action.payload.msg,
+        totalElements: action.payload.data.count
       }
     case DESC_SUCCESS:
       return {
         ...state,
-        tags: action.payload.body.data.tags,
-        desc: action.payload.body.data,
-        msg: action.payload.message,
-        comment: action.payload.body.data.comments
+        desc: action.payload.data,
+        tags: action.payload.data.tags,
+        msg: action.payload.msg
       }
     case COMMENT_SUCCESS:
       return {
         ...state,
-        commentSize: state.comment.push({
+        commentSize: state.desc.comment.push({
           content: action.newComment,
-          createTime: +Date.now(),
+          created_at: +Date.now(),
           user: {
             username: action.username
           }
@@ -122,27 +118,27 @@ function commentFailure(data) {
  */
 
 export function getBlogList({
-  order,
-  catalogId,
-  keyword,
-  pageIndex,
-  pageSize
+  offset,
+  limit,
+  tags,
+  catalog_id,
+  order
 }) {
   return dispatch => {
-    axios.get('/u/admin/blogs', {
+    axios.get('/api/blog', {
       params: {
-        order,
-        catalogId,
-        keyword,
-        pageIndex,
-        pageSize
+        offset,
+        limit,
+        tags,
+        catalog_id,
+        order
       }
     })
       .then(res => {
         if (res.status === 200 && res.data.code === 0) {
           dispatch(listSuccess(res.data))
         } else {
-          dispatch(listFailure(res.data.message))
+          dispatch(listFailure(res.data.msg))
         }
       })
       .catch(err => {
@@ -153,7 +149,7 @@ export function getBlogList({
 
 export function getBlogDesc(id) {
   return dispatch => {
-    axios.get(`/u/admin/blogs/${id}`)
+    axios.get(`/api/blog/${id}`)
       .then(res => {
         if (res.status === 200 && res.data.code === 0) {
           dispatch(descSuccess(res.data))
@@ -168,24 +164,20 @@ export function getBlogDesc(id) {
 }
 
 export function createComment({
-  blogId,
-  userId,
-  commentContent,
+  blog_id,
+  user_id,
+  content,
   username
 }) {
   return dispatch => {
-    axios.post('/u/comments', {
-      blogId,
-      userId,
-      commentContent
-    }, {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-      }
+    axios.post('/api/users/comment', {
+      blog_id,
+      user_id,
+      content
     })
     .then(res => {
-      if(res.status === 200 && res.data.code === 0) {
-        dispatch(commentSuccess(res.data, commentContent, username))
+      if(res.status === 201 && res.data.code === 0) {
+        dispatch(commentSuccess(res.data, content, username))
       } else {
         dispatch(commentFailure(res.data.message))
       }
