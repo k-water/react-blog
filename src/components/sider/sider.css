@@ -50,3 +50,10 @@
   padding: 10px 15px 20px 15px;
   font-size: 14px;
 }
+.tags-wrapper {
+  margin-top: 20px;
+}
+
+.tags-content {
+  padding: 20px;
+}
