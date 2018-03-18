@@ -57,3 +57,6 @@
 .tags-content {
   padding: 20px;
 }
+.tags-content .ant-tag {
+  margin: 6px;
+}
