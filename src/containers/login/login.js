@@ -8,6 +8,7 @@ import {
 } from 'antd'
 import { connect } from 'react-redux'
 import axios from 'axios'
+import Cookies from 'js-cookie'
 import { loginSuccess, loginFailure } from '../../redux/user.redux'
 @connect(
   state => state.user,
@@ -32,6 +33,10 @@ class Login extends Component {
     .then(res => {
       if(res.status === 200 && res.data.code === 0) {
         this.props.loginSuccess(res.data)
+        Cookies.set('username', username, {
+          expires: 1/24,
+          path: '/'
+        })
         this.props.handleCancel()
         this.setState({
           username: '',
