@@ -5,6 +5,11 @@
 
 > **项目地址**：https://github.com/k-water/react-blog
  如果觉得不错的话，您可以点右上角 "Star" 支持一下 谢谢！ ^_^
+ 
+ 
+> **后台管理** [https://github.com/k-water/blog-admin](https://github.com/k-water/blog-admin)
+
+> **接口** [https://github.com/k-water/egg-blog](https://github.com/k-water/egg-blog)
 
 > **线上访问**： http://119.29.151.195
 
