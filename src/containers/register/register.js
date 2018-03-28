@@ -27,7 +27,8 @@ class Register extends Component {
   register({username, password}) {
     axios.post('/api/users', {
       username,
-      password
+      password,
+      authority_id: 2
     })
     .then(res => {
       if (res.status === 201 && res.data.code === 0) {
