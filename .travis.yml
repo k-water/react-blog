@@ -1,0 +1,3 @@
+before_install:
+- openssl aes-256-cbc -K $encrypted_92038560b8e1_key -iv $encrypted_92038560b8e1_iv
+  -in sshkey.enc -out ~\/.traviskey/sshkey -d
