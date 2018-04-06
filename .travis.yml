@@ -1,3 +1,17 @@
+language: node_js
+node_js:
+  - '9.5.0'
 before_install:
 - openssl aes-256-cbc -K $encrypted_92038560b8e1_key -iv $encrypted_92038560b8e1_iv
-  -in sshkey.enc -out ~\/.traviskey/sshkey -d
+  -in sshkey.enc -out ~/.traviskey/sshkey -d
+- chmod 600 ~/.traviskey/sshkey
+- echo -e "Host 119.29.151.195\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+before_script: npm install
+script:
+  - npm run build
+after_success:
+  - npm prune --production  # 删除devDependencies
+  - tar -jcf build.tar.bz2 *    # 打包并压缩代码
+  - scp build.tar.bz2 root@119.29.151.195:~/  # 复制到生产服务器上
+  - ssh root@119.29.151.195 'mkdir -p build && tar -jxf build.tar.bz2 -C build'   # 解压
+  - ssh root@119.29.151.195 'cd build && node -s sever build'  # 重启pm2
