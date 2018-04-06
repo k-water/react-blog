@@ -20,4 +20,4 @@ before_script: npm install
 script:
 - npm run build
 after_success:
-ssh water@119.29.151.195 -o StrictHostKeyChecking=no 'cd ~/fontend/react-blog && git pull && npm install && npm run build'   #使用ssh连接服务器
+- ssh water@119.29.151.195 -o StrictHostKeyChecking=no 'cd ~/fontend/react-blog && git pull && npm install && npm run build'   #使用ssh连接服务器
