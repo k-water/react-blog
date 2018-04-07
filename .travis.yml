@@ -20,7 +20,7 @@ before_script: npm install
 script:
 - npm run build
 after_success:
-# - npm prune --production 
-- tar -jcf react-blog.tar.bz2
+- npm prune --production 
+- tar -jcf react-blog.tar.bz2 *
 - scp react-blog.tar.bz2 water@119.29.151.195: ~/
 - ssh water@119.29.151.195 'mkdir -p react-blog && tar -jxf react-blog.tar.bz2 -C react-blog'
