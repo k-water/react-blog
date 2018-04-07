@@ -1,3 +1,8 @@
+
+<img src="https://oc1gyfe6q.qnssl.com/18-4-7/12327802.jpg" width="200" height="200" />
+
+[![Build Status](https://travis-ci.org/k-water/react-blog.svg?branch=master)](https://travis-ci.org/k-water/react-blog)
+
 ### 前言
 在学习react的过程中，深深的被react的函数式编程的模式所吸引，一切皆组件，所有的东西都是JavaScript。React框架其实功能很单一，主要负责渲染的功能，但是社区很活跃，衍生出了很多优秀的库和工具。个人觉得，想要做好一个项目，往往需要其他库和工具的配合，例如`redux`管理数据，`react-router`管理路由等，掌握基本的`webpack配置`和`es6语法`，然后想要提高性能，还有配合react的钩子函数和`immutable.js`，什么时候组件不需要重新渲染，`next.js`服务端渲染等等...
 一直有一个想法就是重构自己的博客，刚好这段时间放假，又刚好学习了react，于是就有了这个项目。
