@@ -22,5 +22,5 @@ script:
 after_success:
 # - npm prune --production 
 - tar -jcf build.tar.bz2
-- scp build.tar.bz2 water@119.29.151.195: ~/fontend
+- scp build.tar.bz2 water@119.29.151.195: ~/
 - ssh water@119.29.151.195 'mkdir -p build && tar -jxf build.tar.bz2 -C build'
