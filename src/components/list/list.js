@@ -24,10 +24,18 @@ class BlogList extends Component {
       currentPage: 1
     }
   }
-  componentDidMount() {
+  componentWillMount() {
     document.title = 'Water Blog'
-    const tags = this.props.match.params.tags
-    const catalog = this.props.match.params.catalog
+    const { tags, catalog } = this.props.match.params
+    this.getBlog(tags, catalog)
+  }
+  componentWillReceiveProps(nextProps) {
+    if (this.props.match.url !== nextProps.match.url) {
+      const { tags, catalog } = nextProps.match.params
+      this.getBlog(tags, catalog)
+    }
+  }
+  getBlog(tags, catalog) {
     let params = {
       offset: 0,
       limit: 5,
