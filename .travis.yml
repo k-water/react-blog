@@ -13,7 +13,7 @@ addons:
   - 119.29.151.195
 before_install:
 - openssl aes-256-cbc -K $encrypted_c070840133dd_key -iv $encrypted_c070840133dd_iv
-  -in id_rsa.enc -out ~\/.ssh/id_rsa -d
+  -in id_rsa.enc -out ~/.ssh/id_rsa -d
 - chmod 600 ~/.ssh/id_rsa
 - echo -e "Host 119.29.151.195\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 before_script: npm install
