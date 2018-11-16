@@ -12,7 +12,7 @@ addons:
   ssh_known_hosts:
   - 119.29.151.195
 before_install:
-- openssl aes-256-cbc -K $encrypted_c070840133dd_key -iv $encrypted_c070840133dd_iv
+- openssl aes-256-cbc -K $encrypted_4a629ed8a14a_key -iv $encrypted_4a629ed8a14a_iv
   -in id_rsa.enc -out ~/.ssh/id_rsa -d
 - chmod 600 ~/.ssh/id_rsa
 - echo -e "Host 119.29.151.195\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
@@ -20,6 +20,5 @@ before_script: npm install
 after_success:
 - npm prune --production
 - tar -jcf react-blog.tar.bz2 *
-- scp react-blog.tar.bz2 root@119.29.151.195:~/
-- ssh root@119.29.151.195 'mkdir -p react-blog && tar -jxf react-blog.tar.bz2 -C
-  react-blog'
+- scp react-blog.tar.bz2 water@119.29.151.195:~/
+- ssh water@119.29.151.195 'mkdir -p react-blog && tar -jxf react-blog.tar.bz2 -C react-blog'
