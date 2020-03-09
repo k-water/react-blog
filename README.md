@@ -1,5 +1,5 @@
 
-<img src="https://oc1gyfe6q.qnssl.com/18-4-7/12327802.jpg" width="200" height="200" />
+
 
 [![Build Status](https://travis-ci.org/k-water/react-blog.svg?branch=master)](https://travis-ci.org/k-water/react-blog)
 
@@ -15,10 +15,6 @@
 > **后台管理**：[https://github.com/k-water/blog-admin](https://github.com/k-water/blog-admin)
 
 > **接口**：[https://github.com/k-water/egg-blog](https://github.com/k-water/egg-blog)
-
-> **线上访问**： http://119.29.151.195
-
-> **功能**
 
 ![](https://oc1gyfe6q.qnssl.com/18-3-20/38808679.jpg)
 
